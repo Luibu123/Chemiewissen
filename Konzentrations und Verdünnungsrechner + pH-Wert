@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemie Lernwebseite</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        function berechnePH() {
+            let konzentration = parseFloat(document.getElementById('konzentration').value);
+            if (konzentration > 0) {
+                let pH = -Math.log10(konzentration);
+                document.getElementById('ph-wert').innerText = "pH-Wert: " + pH.toFixed(2);
+            } else {
+                document.getElementById('ph-wert').innerText = "Ungültige Eingabe";
+            }
+        }
+
+        function berechneVerdünnung() {
+            let c1 = parseFloat(document.getElementById('c1').value);
+            let v1 = parseFloat(document.getElementById('v1').value);
+            let v2 = parseFloat(document.getElementById('v2').value);
+            if (c1 > 0 && v1 > 0 && v2 > 0) {
+                let c2 = (c1 * v1) / v2;
+                document.getElementById('verdünnungsergebnis').innerText = "Neue Konzentration: " + c2.toFixed(2) + " mol/L";
+            } else {
+                document.getElementById('verdünnungsergebnis').innerText = "Ungültige Eingabe";
+            }
+        }
+
+        function berechneKonzentration() {
+            let stoffmenge = parseFloat(document.getElementById('stoffmenge').value);
+            let volumen = parseFloat(document.getElementById('volumen').value);
+            if (stoffmenge > 0 && volumen > 0) {
+                let konzentration = stoffmenge / volumen;
+                document.getElementById('konzentrationsergebnis').innerText = "Konzentration: " + konzentration.toFixed(2) + " mol/L";
+            } else {
+                document.getElementById('konzentrationsergebnis').innerText = "Ungültige Eingabe";
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100 p-6">
+    <div class="container mx-auto">
+        <h1 class="text-3xl font-bold text-center mb-6">Chemie Lernwebseite</h1>
+        
+        <div class="grid grid-cols-3 gap-4">
+            <div class="bg-white p-4 rounded shadow">
+                <h2 class="text-xl font-bold">Physikalische Chemie</h2>
+                <ul class="list-disc pl-5">
+                    <li>Thermodynamik</li>
+                    <li>Kinetik</li>
+                    <li>Elektrochemie</li>
+                </ul>
+            </div>
+            <div class="bg-white p-4 rounded shadow">
+                <h2 class="text-xl font-bold">Anorganische Chemie</h2>
+                <ul class="list-disc pl-5">
+                    <li>Periodensystem</li>
+                    <li>Salze und Oxide</li>
+                    <li>Komplexchemie</li>
+                </ul>
+            </div>
+            <div class="bg-white p-4 rounded shadow">
+                <h2 class="text-xl font-bold">Organische Chemie</h2>
+                <ul class="list-disc pl-5">
+                    <li>Alkane, Alkene, Alkine</li>
+                    <li>Aromaten</li>
+                    <li>Biomoleküle</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="mt-6 bg-white p-4 rounded shadow">
+            <h2 class="text-xl font-bold">pH-Wert Rechner</h2>
+            <label for="konzentration" class="block mt-2">Säurekonzentration (mol/L):</label>
+            <input type="number" id="konzentration" class="border p-2 w-full">
+            <button onclick="berechnePH()" class="bg-blue-500 text-white p-2 mt-2">Berechnen</button>
+            <p id="ph-wert" class="mt-2 font-bold"></p>
+        </div>
+        
+        <div class="mt-6 bg-white p-4 rounded shadow">
+            <h2 class="text-xl font-bold">Verdünnungsrechner</h2>
+            <label for="c1" class="block">Anfangskonzentration (mol/L):</label>
+            <input type="number" id="c1" class="border p-2 w-full">
+            <label for="v1" class="block mt-2">Anfangsvolumen (L):</label>
+            <input type="number" id="v1" class="border p-2 w-full">
+            <label for="v2" class="block mt-2">Endvolumen (L):</label>
+            <input type="number" id="v2" class="border p-2 w-full">
+            <button onclick="berechneVerdünnung()" class="bg-blue-500 text-white p-2 mt-2">Berechnen</button>
+            <p id="verdünnungsergebnis" class="mt-2 font-bold"></p>
+        </div>
+        
+        <div class="mt-6 bg-white p-4 rounded shadow">
+            <h2 class="text-xl font-bold">Konzentrationsrechner</h2>
+            <label for="stoffmenge" class="block">Stoffmenge (mol):</label>
+            <input type="number" id="stoffmenge" class="border p-2 w-full">
+            <label for="volumen" class="block mt-2">Volumen (L):</label>
+            <input type="number" id="volumen" class="border p-2 w-full">
+            <button onclick="berechneKonzentration()" class="bg-blue-500 text-white p-2 mt-2">Berechnen</button>
+            <p id="konzentrationsergebnis" class="mt-2 font-bold"></p>
+        </div>
+    </div>
+</body>
+</html>
